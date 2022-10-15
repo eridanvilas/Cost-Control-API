@@ -5,6 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MediatR;
+using CostControlAPI.Repositories.Contrants;
+using CostControlAPI.Repositories.FinancialTransaction;
+using CostControlAPI.Repositories.FinancialTransaction.CreateFinancialTransactionRepository;
 
 namespace CostControlAPI
 {
@@ -22,6 +25,8 @@ namespace CostControlAPI
         {
 
             services.AddControllers();
+            services.AddTransient<IFinancialTransactionRepository, FinancialTransactionRepository>();
+            services.AddTransient<ICreateFinancialTransactionRepository, CreateFinancialTransactionRepository>();
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
