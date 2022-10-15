@@ -5,7 +5,8 @@ namespace CostControlAPI.Repositories.Contrants
 {
     public interface IFinancialTransactionRepository
     {
-        public Task CreateAsync(Models.FinancialTransaction financialTransaction);
-        Task<IEnumerable<Models.FinancialTransaction>> GetAsync(string month ,string year);
+        Task CreateAsync(Models.FinancialTransaction financialTransaction);
+        Task<IList<Models.FinancialTransaction>> GetAsyncByDate(string month ,string year);
+        Task<Models.FinancialTransaction> GetAsyncByIdentifier(string identifier);
     }
 }

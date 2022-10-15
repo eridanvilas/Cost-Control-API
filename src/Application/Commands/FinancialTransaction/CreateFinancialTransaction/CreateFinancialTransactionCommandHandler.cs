@@ -16,7 +16,13 @@ namespace CostControlAPI.Application.Commands.FinancialTransaction.CreateFinanci
 
         public async Task<Unit> Handle(CreateFinancialTransactionCommand request, CancellationToken cancellationToken)
         {
-            await _financialTransactionRepository.CreateAsync(request.FinancialTransaction);
+            var dataDB = await _financialTransactionRepository.GetAsyncByIdentifier(request.FinancialTransaction.Identifier);
+            
+            if(dataDB.Id == 0)
+            {
+                await _financialTransactionRepository.CreateAsync(request.FinancialTransaction);
+            }
+           
             return Unit.Value;
         }
     }
